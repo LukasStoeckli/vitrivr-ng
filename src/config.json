@@ -7,8 +7,8 @@
     "ping_interval": 10000
   },
   "resources": {
-    "host_thumbnails" : "http://127.0.0.1/thumbnails/:o/:s:x",
-    "host_objects": "http://127.0.0.1/videos/:o.mp4",
+    "host_thumbnails" : "http://127.0.0.1/api/v1/thumbnails/:o/:s:x",
+    "host_objects": "http://127.0.0.1/api/v1/objects/:o",
     "suffix_default":"jpg",
     "suffix": {
       "IMAGE": "jpg",
