@@ -76,14 +76,10 @@ export class ResolverService {
      */
     public pathToObject(object: MediaObject) {
 
-        // why is the second '/' missing in the path???????
-        if (object.path.startsWith("http:/") || object.path.startsWith("https:/")) {
+        if (object.path.startsWith("http://") || object.path.startsWith("https://")) {
             // check if IIIF image
 
-            // else return the url I quess?
-            // is this part of future vitrivr?
-
-
+            // get imgSize from config
             let iiifUrl = this.pathToIIIFImage(object, "full", "full", "0", "default", "jpg");
 
             return iiifUrl;
@@ -108,15 +104,10 @@ export class ResolverService {
      */
     public pathToThumbnail(object: MediaObject, segment: MediaSegment) {
 
-
-        // why is the second '/' missing in the path???????
         if (object.path.startsWith("http:/") || object.path.startsWith("https:/")) {
             // check if IIIF image
 
-            // else return the url I quess?
-            // is this part of future vitrivr?
-
-
+            // get thumbnailSize from config
             let iiifUrl = this.pathToIIIFImage(object, "full", "!200,150", "0", "default", "jpg");
 
             return iiifUrl;
@@ -146,19 +137,10 @@ export class ResolverService {
      * @return {string} IIIF Image API URL
      */
     private pathToIIIFImage(object: MediaObject, region: String, size: String, rotation: String, quality: String, format: String) {
-        let iiifUrl = object.path;
-
-        // bc the second '/' goes AWAL somewhere
-        if (object.path.startsWith("https:/")) {
-            iiifUrl = iiifUrl.substring(0,7) + "/" + iiifUrl.substring(7);
-        } else {
-            iiifUrl = iiifUrl.substring(0,6) + "/" + iiifUrl.substring(6);
-        }
-
-        // build URL
-        // IIIF specification:
+        // IIIF Image API
         // {scheme}://{server}{/prefix}/{identifier}/{region}/{size}/{rotation}/{quality}.{format}
         // scheme through identifier are given by object.path
+        let iiifUrl = object.path;
         iiifUrl += "/" + region;
         iiifUrl += "/" + size;
         iiifUrl += "/" + rotation;
