@@ -17,6 +17,7 @@ import {InteractionEvent} from "../../shared/model/events/interaction-event.mode
 import {ContextKey, InteractionEventComponent} from "../../shared/model/events/interaction-event-component.model";
 import {map} from "rxjs/operators";
 import {FilterService} from "../../core/queries/filter.service";
+import * as OpenSeadragon from 'openseadragon';
 
 @Component({
     moduleId: module.id,
@@ -134,6 +135,24 @@ export class MiniGalleryComponent extends AbstractResultsViewComponent<SegmentSc
             let context: Map<ContextKey, any> = new Map();
             context.set("i:mediasegment", segment.segmentId);
             this._eventBusService.publish(new InteractionEvent(new InteractionEventComponent(InteractionEventType.EXAMINE, context)))
+
+
+            console.log("path" + segment.objectScoreContainer.path);
+            console.log("name: " + segment.objectScoreContainer.name);
+
+            /** access html */
+            /** open resolver */
+            /** fix missing '/' in path!!!!!! */
+
+            if (segment.objectScoreContainer.path.startsWith("http")) {
+                var viewer = OpenSeadragon({
+                    id: "seadragon-viewer",
+                    prefixUrl: "//openseadragon.github.io/openseadragon/images/",
+                    tileSources: [
+                        segment.objectScoreContainer.path + "/info.json"
+                    ]
+                });
+            }
         }
     }
     
