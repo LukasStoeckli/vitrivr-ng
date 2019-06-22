@@ -6,9 +6,6 @@
 
     <div [style.display]="'flex'" [style.justify-content]="'flex-start'">
         <div>
-
-            <div id="seadragon-viewer" style="width:800px; height:600px;"></div>
-            
             <div [style.max-height]="'400px'">
                 <video #videoplayer *ngIf="(mediaobject|async).mediatype == 'VIDEO'" src="{{_resolver.pathToObject((mediaobject|async))}}" controls [style.width]="'400px'"></video>
                 <audio #audioplayer *ngIf="(mediaobject|async).mediatype == 'AUDIO'" src="{{_resolver.pathToObject((mediaobject|async))}}" controls [style.width]="'400px'" width="400"></audio>

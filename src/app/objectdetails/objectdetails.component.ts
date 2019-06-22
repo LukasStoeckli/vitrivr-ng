@@ -13,6 +13,7 @@ import {MediaObjectDragContainer} from "../shared/model/internal/media-object-dr
 import {EMPTY, Observable} from "rxjs";
 import {HtmlUtil} from "../shared/util/html.util";
 import {catchError, filter, map, tap} from "rxjs/operators";
+import * as OpenSeadragon from 'openseadragon';
 
 @Component({
     moduleId: module.id,

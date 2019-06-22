@@ -18,6 +18,7 @@ import {MediaSegmentDragContainer} from "../shared/model/internal/media-segment-
 import {Router} from "@angular/router";
 import {filter} from "rxjs/operators";
 import {FilterService} from "../core/queries/filter.service";
+import * as OpenSeadragon from "openseadragon";
 
 export abstract class AbstractResultsViewComponent<T> implements OnInit, OnDestroy  {
     /** Indicator whether the progress bar should be visible. */
@@ -142,6 +143,22 @@ export abstract class AbstractResultsViewComponent<T> implements OnInit, OnDestr
         let context: Map<ContextKey,any> = new Map();
         context.set("i:mediasegment", segment.objectId);
         this._eventBusService.publish(new InteractionEvent(new InteractionEventComponent(InteractionEventType.EXAMINE, context)))
+
+
+
+
+        if (segment.objectScoreContainer.path.startsWith("http")) {
+            var viewer = OpenSeadragon({
+                id: "seadragon-viewer",
+                prefixUrl: "//openseadragon.github.io/openseadragon/images/",
+                tileSources: [
+                    segment.objectScoreContainer.path + "/info.json"
+                ]
+            });
+        }
+
+
+        
     }
 
     /**
